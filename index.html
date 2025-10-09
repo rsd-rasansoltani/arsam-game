@@ -47,6 +47,63 @@
     </div>
 
 </section>
+<section class="contact" id="contact">
+
+    <h1 class="heading"> تماس با <span> من </span> </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img class="tilt" src="images/contact-img.svg" alt="">
+        </div>
+
+        <form id="contact-form">
+            <h3>برای این قسمت VPN روشن باشد.</h3>
+            <div class="inputBox">
+                <input type="text" placeholder="اسم" id="name" required>
+                <input type="email" placeholder="ایمیل" id="email" required>
+            </div>
+
+            <input type="text" placeholder="عنوان" class="box" id="subject" required>
+
+            <textarea placeholder="متن پیام" id="message" cols="30" rows="10" required></textarea>
+
+            <input type="submit" class="btn" value="ارسال پیام">
+
+        </form>
+
+    </div>
+
+</section>
+
+<script>
+document.getElementById("contact-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const botToken = "8055408219:AAFV8jbuSlLzrN2aQw1J9PaapSEItHmsUDk";
+  const chatIds = ["7234591266", "8021884218"];
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const subject = document.getElementById("subject").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  const text = `📩 پیام جدید از فرم تماس:\n\n👤 نام: ${name}\n📧 ایمیل: ${email}\n📝 عنوان: ${subject}\n💬 پیام:\n${message}`;
+
+  // ارسال برای همه چت آیدی‌ها
+  chatIds.forEach(id => {
+    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ chat_id: id, text: text })
+    });
+  });
+
+  alert("✅ پیام شما با موفقیت ارسال شد!");
+  e.target.reset();
+});
+</script>
+
 
 
 
