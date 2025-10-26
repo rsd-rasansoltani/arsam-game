@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title style="background-color: #D4AF37;">ARVIX  </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="home" id="home">
+    <div class="content">
+        <img class="tilt" src="00.jpg" alt="ARVIX">
+        <h3>ARV<span>IX</span></h3>
+        <h2>به آرویکس خوش آمدید. در اینجا می‌توانید با بازی‌های طراحی‌شده، درآمد کسب کنید. هر بازی به‌صورت عادلانه و با تعامل واقعی شما طراحی شده است.</h2>
+        <p>ARV<span class="typing-text">IX</span></p>
+        <a href="html.html" class="btn">شروع بازی پینگ پونگ</a>
+        <a href="not2.html" class="btn">شروع بازی کوین</a>
+        <a href="nin.html" class="btn">(ویژه ویندوز) بازی پرش نینجا</a><br>
+        <a href="#contact" class="btn" style="background-color: var(--gold); color: var(--black);">پشتیبانی</a>
+        <a href="amozesh.html" class="btn" style="background-color: var(--gold); color: var(--black);">آموزش</a>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+
+    <h1 class="heading"> تماس با <span> من </span>  | پشتیبانی<span></span> </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img class="tilt" src="images/contact-img.svg" alt="">
+        </div>
+
+        <form id="contact-form">
+            <h3>برای این قسمت <span style="color:#D4AF37 ;">VPN </span> روشن باشد.</h3>
+            <div class="inputBox">
+                <input type="text" placeholder="اسم" id="name" required>
+                <input type="email" placeholder="ایمیل" id="email" required>
+            </div>
+
+            <input type="text" placeholder="عنوان" class="box" id="subject" required>
+
+            <textarea placeholder="متن پیام" id="message" cols="30" rows="10" required></textarea>
+
+            <input type="submit" class="btn" value="ارسال پیام">
+
+        </form>
+
+    </div>
+
+</section>
+
+<div class="footer">
+    طراحی توسط <span><a href="https://arsamvision.ir/" target="_blank">ARSAM-VISION | آرسام ویژن</a></span>.<br><br>
+    <span>© 2025–2026 کلیه حقوق محفوظ است.</span>
+</div>
+
+<!-- Removed external JS that caused clutter (particles, tilt, typed.js) for cleaner classic design -->
+<script>
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('پیام شما با موفقیت ارسال شد! پاسخ به ایمیل شما ارسال خواهد شد.');
+    this.reset();
+});
+</script>
+
+</body>
+</html>

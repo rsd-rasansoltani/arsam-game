@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> آرکوین | ARCOIN</title>
+    <style>
+        body {
+            font-family: "IRANSansWeb", Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 30px 20px;
+            background: #0a0a0a;
+            color: #f0f0f0;
+            direction: rtl;
+        }
+        h1 {
+            color: #D4AF37;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+        #score, #coins, #profile {
+            font-size: 1.8rem;
+            margin: 15px 0;
+            color: #ccc;
+        }
+        #coins {
+            color: #ffd700;
+        }
+        #button {
+            font-size: 0;
+            padding: 0;
+            cursor: pointer;
+            background: none;
+            border: none;
+            margin: 20px 0;
+        }
+        #button img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid #D4AF37;
+            transition: transform 0.1s;
+        }
+        #button:active img {
+            transform: scale(0.95);
+        }
+        #convertButton {
+            font-size: 1.7rem;
+            padding: 12px 25px;
+            cursor: pointer;
+            background: #000;
+            color: #D4AF37;
+            border: 1px solid #D4AF37;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        #convertButton:hover {
+            background: #D4AF37;
+            color: #000;
+        }
+        .warning {
+            color: #ff6b6b;
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>آرکوین | ARCOIN </h1>
+    <p id="score">امتیاز: 0</p>
+    <p id="coins">سکه‌ها: 0</p>
+    <p id="profile"></p>
+    <p id="profile">پاداش روزانه پس از ورود مجدد فعال می‌شود.</p>
+    
+    <button id="button" aria-label="افزایش امتیاز">
+        <img src="11.jpg" alt="کلیک برای امتیاز">
+    </button>
+    <br>
+    <button id="convertButton">تبدیل امتیاز به سکه</button>
+    <p class="warning">⚠️ فقط کلیک دستی مجاز است. استفاده از ربات‌ها ممنوع است.</p>
+
+    <script>
+        let score = localStorage.getItem("score") ? parseInt(localStorage.getItem("score")) : 0;
+        let coins = localStorage.getItem("coins") ? parseFloat(localStorage.getItem("coins")) : 0;
+        let lastLogin = localStorage.getItem("lastLogin") ? parseInt(localStorage.getItem("lastLogin")) : Date.now();
+
+        function calculateBonus() {
+            const now = Date.now();
+            const diffHours = Math.floor((now - lastLogin) / (1000 * 60 * 60));
+            if (diffHours >= 24) {
+                const bonus = 1000;
+                score += bonus;
+               document.getElementById("profile").textContent = "امتیاز بونوس: ${bonus}";
+                localStorage.setItem("score", score);
+                document.getElementById("score").textContent = "امتیاز: " + score;
+            } else {
+                document.getElementById("profile").textContent = "پاداش روزانه فردا فعال می‌شود.";
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById("score").textContent = "امتیاز: " + score;
+            document.getElementById("coins").textContent = "سکه‌ها: " + coins.toFixed(6);
+        }
+
+        function increaseScore() {
+            // Only allow real user interaction
+            if (event.isTrusted) {
+                score++;
+                updateDisplay();
+                localStorage.setItem("score", score);
+            }
+        }
+
+        function convertToCoins() {
+            if (score >= 100000000) {
+                const gained = score / 100000000;
+                coins += gained;
+                score = 0;
+                updateDisplay();
+                localStorage.setItem("coins", coins);
+                localStorage.setItem("score", score);
+                alert("تبدیل با موفقیت انجام شد!");
+            } else {
+                alert("برای تبدیل به سکه، به حداقل 100,000,000 امتیاز نیاز دارید.");
+            }
+        }
+
+        document.getElementById("button").addEventListener("click", increaseScore);
+        document.getElementById("convertButton").addEventListener("click", convertToCoins);
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Enter") {
+                increaseScore();
+            }
+        });
+
+        calculateBonus();
+        updateDisplay();
+        localStorage.setItem("lastLogin", Date.now());
+    </script>
+</body>
+</html>
